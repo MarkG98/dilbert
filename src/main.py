@@ -17,7 +17,7 @@ num2daystr = {
 def job(client):
     day = datetime.today().weekday()
     if day == 5 or day == 6:
-        tweet = "It's the weekend!"
+        return
     elif day >= 0 and day <= 3:
         tweet = "It's only {}.".format(num2daystr[day])
     else:
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     access_token=ACCESS_TOKEN, 
     access_token_secret=ACCESS_TOKEN_SECRET)
 
-    schedule.every().minute.at(":30").do(job, client)
+    schedule.every().day.at("06:00").do(job, client)
     while True:
         schedule.run_pending()
         time.sleep(1)

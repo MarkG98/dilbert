@@ -5,4 +5,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY /src .
-CMD [ "nohup", "python", "./main.py" ]
+CMD [ "python", "./main.py" ]
