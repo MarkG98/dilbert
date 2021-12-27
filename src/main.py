@@ -33,7 +33,7 @@ if __name__ == "__main__":
     access_token=environ.get('ACCESS_TOKEN'), 
     access_token_secret=environ.get('ACCESS_TOKEN_SECRET'))
 
-    schedule.every().dat.at("06:00").do(job, client)
+    schedule.every().day.at("06:00").do(job, client)
     while True:
         schedule.run_pending()
         time.sleep(1)
