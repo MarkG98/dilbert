@@ -2,7 +2,8 @@ import tweepy
 from datetime import datetime
 import schedule
 import time
-from auth import API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET, BEARER_TOKEN
+from os import environ
+# from auth import API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET, BEARER_TOKEN
 
 num2daystr = {
     0 : "Monday", 
@@ -17,7 +18,7 @@ num2daystr = {
 def job(client):
     day = datetime.today().weekday()
     if day == 5 or day == 6:
-        return
+        tweet = "Weewoo"
     elif day >= 0 and day <= 3:
         tweet = "It's only {}.".format(num2daystr[day])
     else:
@@ -26,13 +27,13 @@ def job(client):
 
 if __name__ == "__main__":
 
-    client = tweepy.Client(bearer_token=BEARER_TOKEN, 
-    consumer_key=API_KEY, 
-    consumer_secret=API_SECRET, 
-    access_token=ACCESS_TOKEN, 
-    access_token_secret=ACCESS_TOKEN_SECRET)
+    client = tweepy.Client(bearer_token=environ.get('BEARER_TOKEN'), 
+    consumer_key=environ.get('API_KEY'), 
+    consumer_secret=environ.get('API_SECRET'), 
+    access_token=environ.get('ACCESS_TOKEN'), 
+    access_token_secret=environ.get('ACCESS_TOKEN_SECRET'))
 
-    schedule.every().day.at("06:00").do(job, client)
+    schedule.every().minute.at(":30").do(job, client)
     while True:
         schedule.run_pending()
         time.sleep(1)
