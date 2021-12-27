@@ -18,7 +18,7 @@ num2daystr = {
 def job(client):
     day = datetime.today().weekday()
     if day == 5 or day == 6:
-        tweet = "Weewoo"
+        return
     elif day >= 0 and day <= 3:
         tweet = "It's only {}.".format(num2daystr[day])
     else:
