@@ -1,4 +1,5 @@
 import tweepy
+from flask import Flask
 from datetime import datetime
 import schedule
 import time
@@ -26,6 +27,10 @@ def job(client):
     client.create_tweet(text=tweet)
 
 if __name__ == "__main__":
+
+    # Start a flask app so heroku doesn't think the app isn't working
+    app = Flask(__name__)
+    app.run(environ.get('PORT'))
 
     client = tweepy.Client(bearer_token=environ.get('BEARER_TOKEN'), 
     consumer_key=environ.get('API_KEY'), 
